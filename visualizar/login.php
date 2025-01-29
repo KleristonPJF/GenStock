@@ -9,4 +9,5 @@
         require_once '../html/usuarioesenha.php';
     ?>
     </form>
-</body>ta com o diabo da mentira</html>
+</body>
+</html>
