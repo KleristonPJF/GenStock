@@ -34,7 +34,7 @@
         $usuariocontrolador = new usuariocontrolador();
         try {
             $usuariocontrolador->cadastrar($usuario);
-            header('Location:../visualizar/login.php'); // Redireciona para a página de login após cadastro bem-sucedido
+            header('Location:../visualizar/login.php'); // Redireciona para a página de login dps do cadastro bem-sucedido
         } catch (Exception $erro) {
             echo $erro->getMessage();
         }
