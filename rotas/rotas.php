@@ -15,9 +15,10 @@
 
         $usuariocontrolador = new usuariocontrolador();
         try {
-            if ($usuariocontrolador->login($usuario)) {
-                $_SESSION['usuario'] = $login; // Guarda o nome de usuário na sessão
-                header('Location: paginateste.php'); 
+            $idusuario = $usuariocontrolador->login($usuario);
+            if ($idusuario) {
+                $_SESSION['idusuario'] = $idusuario;
+                header('Location: ../visualizar/portal.php'); 
             } else {
                 header('Location:../visualizar/login.php?erro=1'); // Manda pra página de login com erro
             }
@@ -46,8 +47,13 @@
         session_destroy();
         header('Location:../visualizar/login.php'); // Manda pra página de login dps do logout
         exit();
-   
+        
+    } else if ($acao == 'navlogin') {
+        header('Location:../visualizar/login.php'); // Manda pra página de login dps do logout
+
+    } else if ($acao == 'navcadastro') {
+        header('Location:../visualizar/cadastro.php');
     } else {
-        header('Location:../index.html'); // Manda pra página inicial se não der
+        header('Location:../index.php'); // Manda pra página inicial se não der
     }
 ?>

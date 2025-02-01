@@ -27,7 +27,7 @@ class usuariodao {
             $conexao = new conexao();
             $conn = $conexao->getconexao();
 
-            $sql = "SELECT senha FROM usuario WHERE usuario = ?";
+            $sql = "SELECT idusuario, senha FROM usuario WHERE usuario = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bindvalue(1, $usuario->getusuario());
             $stmt->execute();
@@ -35,7 +35,7 @@ class usuariodao {
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch();
                 if (password_verify($usuario->getsenha(), $row['senha'])) {
-                    return true;
+                    return $row['idusuario'];
                 } else {
                     return false;
                 }

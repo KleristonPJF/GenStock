@@ -4,8 +4,8 @@
     require_once './html/head.php';
 ?>
 <body>
-    <a href="./visualizar/login.php">Login</a>
+    <a href="./rotas/rotas.php?acao=navlogin">Login</a>
     <br>
-    <a href="./visualizar/cadastro.php">Cadastro</a>
+    <a href="./rotas/rotas.php?acao=navcadastro">Cadastro</a>
 </body>
 </html>

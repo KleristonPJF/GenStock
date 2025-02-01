@@ -1,6 +1,6 @@
 <?php
 
-    class Conexao{
+    class conexao{
 
         private $conexao = null; 
 
