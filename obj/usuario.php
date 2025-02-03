@@ -1,5 +1,7 @@
 <?php
-
+    if (!defined('ACCESS_ALLOWED')) {
+        exit('Acesso direto não permitido');
+    }
     class usuario{
 
         private $usuario;

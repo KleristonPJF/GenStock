@@ -1,5 +1,8 @@
 <?php
-
+    if (!defined('ACCESS_ALLOWED')) {
+        exit('Acesso direto não permitido');
+    }
+    
     require_once "conexao.php";
     require_once "../dao/usuariodao.php";
 

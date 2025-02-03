@@ -1,4 +1,5 @@
 <?php
+    define('ACCESS_ALLOWED', true);
     require_once '../autenticar/autenticar.php';
 ?>
 <!DOCTYPE html>
@@ -7,8 +8,10 @@
     require_once '../html/head.php';
 ?>
 <body>
-    <h1>Bem vindo</h1>
+    <?php
+        echo '<h1>Bem vindo ' . $_SESSION['usuario']['nome'] . '</h1>';
+    ?>
     <a href=""></a>
-    <a href="./logout.php">Logout</a>
+    <a href="../rotas/rotas.php?acao=logout">Logout</a>
 </body>
 </html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
-    require_once '../html/head.php';
+    define('ACCESS_ALLOWED', true);
+    include '../html/head.php';
 ?>
 <body>
     <form action="../rotas/rotas.php?acao=login" method="post">

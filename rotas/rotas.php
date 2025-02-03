@@ -1,4 +1,5 @@
 <?php
+    define('ACCESS_ALLOWED', true);
     require_once '../obj/usuario.php';
     require_once '../controlador/usuariocontrolador.php';
     session_start();
@@ -17,7 +18,10 @@
         try {
             $idusuario = $usuariocontrolador->login($usuario);
             if ($idusuario) {
-                $_SESSION['idusuario'] = $idusuario;
+                $_SESSION['usuario'] = [
+                    'idusuario' => $idusuario,
+                    'nome' => $login
+                ];
                 header('Location: ../visualizar/portal.php'); 
             } else {
                 header('Location:../visualizar/login.php?erro=1'); // Manda pra página de login com erro
