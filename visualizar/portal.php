@@ -11,7 +11,7 @@
     <?php
         echo '<h1>Bem vindo ' . $_SESSION['usuario']['nome'] . '</h1>';
     ?>
-    <a href=""></a>
+    <a href="../rotas/rotas.php?acao=estoque">Estoque</a>
     <a href="../rotas/rotas.php?acao=logout">Logout</a>
 </body>
 </html>

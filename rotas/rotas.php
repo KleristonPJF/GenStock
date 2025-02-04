@@ -2,6 +2,7 @@
     define('ACCESS_ALLOWED', true);
     require_once '../obj/usuario.php';
     require_once '../controlador/usuariocontrolador.php';
+    require_once '../controlador/inatividade.php';
     session_start();
 
     $acao = $_GET['acao'];
@@ -20,7 +21,8 @@
             if ($idusuario) {
                 $_SESSION['usuario'] = [
                     'idusuario' => $idusuario,
-                    'nome' => $login
+                    'nome' => $login,
+                    'ultimaacao' => time()
                 ];
                 header('Location: ../visualizar/portal.php'); 
             } else {
@@ -57,6 +59,8 @@
 
     } else if ($acao == 'navcadastro') {
         header('Location:../visualizar/cadastro.php');
+    } else if ($acao == 'estoque') {
+        header('Location:../visualizar/portalviwes/estoque.php');
     } else {
         header('Location:../index.php'); // Manda pra página inicial se não der
     }

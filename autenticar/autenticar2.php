@@ -1,5 +1,5 @@
 <?php
-// Esse autenticar é para apenas quando for preciso sair de duas uma pagina
+// Esse autenticar é para apenas quando for preciso sair de apenas uma pagina
 if (!defined('ACCESS_ALLOWED')) {
     exit('Acesso direto não permitido');
 }
@@ -7,7 +7,7 @@ if (!defined('ACCESS_ALLOWED')) {
 session_start();
 
 if (!isset($_SESSION['usuario']['idusuario'])) {
-    header("Location: ../visualizar/login.php"); 
+    header("Location: ../../visualizar/login.php"); 
     exit();
 }
 ?>
