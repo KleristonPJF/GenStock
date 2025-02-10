@@ -1,6 +1,8 @@
 <?php
     define('ACCESS_ALLOWED', true);
     require_once '../obj/usuario.php';
+    require_once '../obj/produto.php';
+    require_once '../controlador/produtocontrolador.php';
     require_once '../controlador/usuariocontrolador.php';
     require_once '../controlador/inatividade.php';
     session_start();
@@ -49,7 +51,6 @@
         }
     
     } else if ($acao == 'logout') {
-        session_start();
         session_destroy();
         header('Location:../visualizar/login.php'); // Manda pra página de login dps do logout
         exit();
@@ -59,8 +60,27 @@
 
     } else if ($acao == 'navcadastro') {
         header('Location:../visualizar/cadastro.php');
-    } else if ($acao == 'estoque') {
+
+    } else if ($acao == 'navestoque') {
         header('Location:../visualizar/portalviwes/estoque.php');
+
+    } else if ($acao == 'cadastrarproduto') {
+        $produtopost = $_POST['produto'];
+        $tipopost = $_POST['tipo'];
+        $quilospost = $_POST['quilos'];
+
+        $produto = new produto();
+        $produto->setproduto($produtopost);
+        $produto->settipo($tipopost);
+        $produto->setquilos($quilospost);
+
+        $produtocontrolador = new produtocontrolador();
+        try {
+            $produtocontrolador->cadastrarproduto($produto);
+            header('Location:../visualizar/portalviwes/estoque.php');
+        } catch (Exception $erro) {
+            echo $erro->getMessage();
+        }
     } else {
         header('Location:../index.php'); // Manda pra página inicial se não der
     }
