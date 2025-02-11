@@ -5,7 +5,6 @@
     require_once '../controlador/produtocontrolador.php';
     require_once '../controlador/usuariocontrolador.php';
     require_once '../controlador/inatividade.php';
-    session_start();
 
     $acao = $_GET['acao'];
 
@@ -61,8 +60,8 @@
     } else if ($acao == 'navcadastro') {
         header('Location:../visualizar/cadastro.php');
 
-    } else if ($acao == 'navestoque') {
-        header('Location:../visualizar/portalviwes/estoque.php');
+    } else if ($acao == 'navproduto') {
+        header('Location:../visualizar/portalviwes/produto.php');
 
     } else if ($acao == 'cadastrarproduto') {
         $produtopost = $_POST['produto'];

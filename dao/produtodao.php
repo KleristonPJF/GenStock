@@ -14,9 +14,9 @@ class produtodao {
             $sql = "INSERT INTO produto(produto, tipo, quilos) VALUES (?, ?, ?)";
             
             $stmt = $conn->prepare($sql);
-            $stmt->bindvalue(1, $produto->getproduto());
-            $stmt->bindvalue(2, $tipo->gettipo());
-            $stmt->bindvalue(3, $quilos->getquilos());
+            $stmt->bindValue(1, $produto->getproduto());
+            $stmt->bindValue(2, $produto->gettipo()); 
+            $stmt->bindValue(3, $produto->getquilos());  
             $stmt->execute();
             
             $conexao->fechar();

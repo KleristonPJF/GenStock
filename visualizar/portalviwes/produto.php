@@ -9,10 +9,9 @@
 ?>
 <body>
     <h1>Produtos</h1>
-    <form action="../../rotas/rotas.php?acao=entradaestoque" method="post">
-        
-        <label for="valorcomprado">Produto:</label>
-        <input type="text" name="valorcomprado" id="valorcomprado" require>
+    <form action="../../rotas/rotas.php?acao=cadastrarproduto" method="post">
+        <label for="produto">Produto:</label>
+        <input type="text" name="produto" id="produto" require>
         <br>
         <label for="tipo">Tipo:</label>
         <input type="text" name="tipo" id="tipo" require>
