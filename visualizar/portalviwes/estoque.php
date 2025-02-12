@@ -8,19 +8,24 @@
     require_once '../../html/head.php';
 ?>
 <body>
-    <h1>Produtos</h1>
+    <h1>Estoque</h1>
     <form action="../../rotas/rotas.php?acao=entradaestoque" method="post">
-        
-        <label for="valorcomprado">Produto:</label>
+        <label for="produto">Produto:</label>
+        <input type="text" name="produto" id="produto" require>
+        <br>
+        <label for="quantidade">Quantidade:</label>
+        <input type="text" name="quantidade" id="quantidade" require>
+        <br>
+        <label for="valorcomprado">Valor Comprado:</label>
         <input type="text" name="valorcomprado" id="valorcomprado" require>
         <br>
-        <label for="tipo">Tipo:</label>
-        <input type="text" name="tipo" id="tipo" require>
+        <label for="porcenragem">Porcentagem:</label>
+        <input type="text" name="porcentagem" id="porcentagem" require>
         <br>
-        <label for="quilos">Quilos(uma unidade):</label>
-        <input type="text" name="quilos" id="quilos" require>
+        <p id="resultado"></p>
         <br>
         <button type="submit">Enviar</button>
     </form>
 </body>
+<script src="../../js/estoque.js"></script>
 </html>

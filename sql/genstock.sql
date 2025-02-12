@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12/02/2025 às 00:21
+-- Tempo de geração: 12/02/2025 às 07:00
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `genstock`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `idcliente` int(11) NOT NULL,
+  `cliente` varchar(120) NOT NULL,
+  `cpfcnpj` varchar(18) NOT NULL,
+  `telefone` varchar(18) NOT NULL,
+  `endereco` varchar(120) NOT NULL,
+  `obs` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `cliente`
+--
+
+INSERT INTO `cliente` (`idcliente`, `cliente`, `cpfcnpj`, `telefone`, `endereco`, `obs`) VALUES
+(1, 'Kleriston Kaua Pereira Jacome Ferreira', '999.999.999-99', '+55 9 9999-9999', 'Rua acula, n102', 'Ele é um macaco');
 
 -- --------------------------------------------------------
 
@@ -88,6 +110,12 @@ INSERT INTO `usuario` (`idusuario`, `usuario`, `senha`) VALUES
 --
 
 --
+-- Índices de tabela `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idcliente`);
+
+--
 -- Índices de tabela `estoque`
 --
 ALTER TABLE `estoque`
@@ -109,6 +137,12 @@ ALTER TABLE `usuario`
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `estoque`

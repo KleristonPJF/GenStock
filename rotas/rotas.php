@@ -2,6 +2,8 @@
     define('ACCESS_ALLOWED', true);
     require_once '../obj/usuario.php';
     require_once '../obj/produto.php';
+    require_once '../obj/cliente.php';
+    require_once '../controlador/clientecontrolador.php';
     require_once '../controlador/produtocontrolador.php';
     require_once '../controlador/usuariocontrolador.php';
     require_once '../controlador/inatividade.php';
@@ -63,6 +65,12 @@
     } else if ($acao == 'navproduto') {
         header('Location:../visualizar/portalviwes/produto.php');
 
+    } else if ($acao == 'naventrada') {
+        header('Location:../visualizar/portalviwes/estoque.php');
+
+    } else if ($acao == 'navcliente') {
+        header('Location:../visualizar/portalviwes/cliente.php');
+    
     } else if ($acao == 'cadastrarproduto') {
         $produtopost = $_POST['produto'];
         $tipopost = $_POST['tipo'];
@@ -77,6 +85,28 @@
         try {
             $produtocontrolador->cadastrarproduto($produto);
             header('Location:../visualizar/portalviwes/estoque.php');
+        } catch (Exception $erro) {
+            echo $erro->getMessage();
+        }
+
+    }else if ($acao == 'cadastrarcliente') {
+        $nome = $_POST['nome'];
+        $cpfcnpj = $_POST['cpfcnpj'];
+        $telefone = $_POST['telefone'];
+        $endereco = $_POST['endereco'];
+        $obs = $_POST['obs'];
+
+        $cliente = new cliente();
+        $cliente->setcliente($nome);
+        $cliente->setcpfcnpj($cpfcnpj);
+        $cliente->settelefone($telefone);
+        $cliente->setendereco($endereco);
+        $cliente->setobs($obs);
+
+        $clientecontrolador = new clientecontrolador();
+        try {
+            $clientecontrolador->cadastrarcliente($cliente);
+            header('Location:../visualizar/portalviwes/cliente.php');
         } catch (Exception $erro) {
             echo $erro->getMessage();
         }
