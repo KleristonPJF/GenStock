@@ -68,6 +68,9 @@
     } else if ($acao == 'naventrada') {
         header('Location:../visualizar/portalviwes/estoque.php');
 
+    } else if ($acao == 'navvendas') {
+        header('Location:../visualizar/portalviwes/vendas.php');
+
     } else if ($acao == 'navcliente') {
         header('Location:../visualizar/portalviwes/cliente.php');
     
