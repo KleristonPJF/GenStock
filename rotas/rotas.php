@@ -65,11 +65,8 @@
     } else if ($acao == 'navproduto') {
         header('Location:../visualizar/portalviwes/produto.php');
 
-    } else if ($acao == 'naventrada') {
-        header('Location:../visualizar/portalviwes/estoque.php');
-
-    } else if ($acao == 'navvendas') {
-        header('Location:../visualizar/portalviwes/vendas.php');
+    } else if ($acao == 'navcarrinho') {
+        header('Location:../visualizar/portalviwes/carrinho.php');
 
     } else if ($acao == 'navcliente') {
         header('Location:../visualizar/portalviwes/cliente.php');
@@ -78,21 +75,27 @@
         $produtopost = $_POST['produto'];
         $tipopost = $_POST['tipo'];
         $quilospost = $_POST['quilos'];
+        $quantidadepost = $_POST['quantidade'];
+        $valorcomprapost = $_POST['valorcompra'];
+        $porcentagemlucropost = $_POST['porcentagemlucro'];
 
         $produto = new produto();
         $produto->setproduto($produtopost);
         $produto->settipo($tipopost);
         $produto->setquilos($quilospost);
+        $produto->setquantidade($quantidadepost);
+        $produto->setvalorcompra($valorcomprapost);
+        $produto->setporcentagemlucro($porcentagemlucropost);
 
         $produtocontrolador = new produtocontrolador();
         try {
             $produtocontrolador->cadastrarproduto($produto);
-            header('Location:../visualizar/portalviwes/estoque.php');
+            header('Location:../visualizar/portal.php');
         } catch (Exception $erro) {
             echo $erro->getMessage();
         }
 
-    }else if ($acao == 'cadastrarcliente') {
+    } else if ($acao == 'cadastrarcliente') {
         $nome = $_POST['nome'];
         $cpfcnpj = $_POST['cpfcnpj'];
         $telefone = $_POST['telefone'];

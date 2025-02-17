@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/02/2025 às 04:32
+-- Tempo de geração: 17/02/2025 às 18:30
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -47,24 +47,18 @@ INSERT INTO `cliente` (`idcliente`, `cliente`, `cpfcnpj`, `telefone`, `endereco`
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `estoque`
+-- Estrutura para tabela `itens_venda`
 --
 
-CREATE TABLE `estoque` (
-  `idestoque` int(11) NOT NULL,
-  `produto` int(11) NOT NULL,
-  `quantidade` varchar(60) NOT NULL,
-  `valorcomprado` varchar(60) NOT NULL,
-  `porcentagem` varchar(60) NOT NULL,
-  `valorvender` varchar(60) NOT NULL
+CREATE TABLE `itens_venda` (
+  `iditem` int(11) NOT NULL,
+  `idvenda` int(11) DEFAULT NULL,
+  `idproduto` int(11) DEFAULT NULL,
+  `produto` varchar(100) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `preco_unitario` decimal(10,2) NOT NULL,
+  `subtotal` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `estoque`
---
-
-INSERT INTO `estoque` (`idestoque`, `produto`, `quantidade`, `valorcomprado`, `porcentagem`, `valorvender`) VALUES
-(1, 1, '100', '50', '10', '55');
 
 -- --------------------------------------------------------
 
@@ -76,16 +70,18 @@ CREATE TABLE `produto` (
   `idproduto` int(11) NOT NULL,
   `produto` varchar(60) NOT NULL,
   `tipo` varchar(60) NOT NULL,
-  `quilos` varchar(60) NOT NULL
+  `quilos` varchar(60) NOT NULL,
+  `quantidade` varchar(60) NOT NULL,
+  `valorcompra` varchar(60) NOT NULL,
+  `porcentagemlucro` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `produto`
 --
 
-INSERT INTO `produto` (`idproduto`, `produto`, `tipo`, `quilos`) VALUES
-(1, 'Batata', 'Saco', '24'),
-(2, 'Tomate', 'Caixa', '10');
+INSERT INTO `produto` (`idproduto`, `produto`, `tipo`, `quilos`, `quantidade`, `valorcompra`, `porcentagemlucro`) VALUES
+(9, 'Batata', 'Saco', '24', '100', '55', '20');
 
 -- --------------------------------------------------------
 
@@ -111,15 +107,14 @@ INSERT INTO `usuario` (`idusuario`, `usuario`, `senha`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `vendas`
+-- Estrutura para tabela `venda`
 --
 
-CREATE TABLE `vendas` (
+CREATE TABLE `venda` (
   `idvenda` int(11) NOT NULL,
-  `idcliente` int(11) NOT NULL,
-  `idproduto` int(11) NOT NULL,
-  `quantidade` int(11) NOT NULL,
-  `datavenda` date NOT NULL
+  `nome_cliente` varchar(100) NOT NULL,
+  `data_venda` datetime DEFAULT current_timestamp(),
+  `total` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -133,11 +128,11 @@ ALTER TABLE `cliente`
   ADD PRIMARY KEY (`idcliente`);
 
 --
--- Índices de tabela `estoque`
+-- Índices de tabela `itens_venda`
 --
-ALTER TABLE `estoque`
-  ADD PRIMARY KEY (`idestoque`),
-  ADD KEY `produto_dados` (`produto`);
+ALTER TABLE `itens_venda`
+  ADD PRIMARY KEY (`iditem`),
+  ADD KEY `idvenda` (`idvenda`);
 
 --
 -- Índices de tabela `produto`
@@ -152,12 +147,10 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idusuario`);
 
 --
--- Índices de tabela `vendas`
+-- Índices de tabela `venda`
 --
-ALTER TABLE `vendas`
-  ADD PRIMARY KEY (`idvenda`),
-  ADD KEY `idcliente` (`idcliente`),
-  ADD KEY `idproduto` (`idproduto`);
+ALTER TABLE `venda`
+  ADD PRIMARY KEY (`idvenda`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -170,16 +163,16 @@ ALTER TABLE `cliente`
   MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de tabela `estoque`
+-- AUTO_INCREMENT de tabela `itens_venda`
 --
-ALTER TABLE `estoque`
-  MODIFY `idestoque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `itens_venda`
+  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `idproduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idproduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
@@ -188,9 +181,9 @@ ALTER TABLE `usuario`
   MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de tabela `vendas`
+-- AUTO_INCREMENT de tabela `venda`
 --
-ALTER TABLE `vendas`
+ALTER TABLE `venda`
   MODIFY `idvenda` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -198,17 +191,10 @@ ALTER TABLE `vendas`
 --
 
 --
--- Restrições para tabelas `estoque`
+-- Restrições para tabelas `itens_venda`
 --
-ALTER TABLE `estoque`
-  ADD CONSTRAINT `produto_dados` FOREIGN KEY (`produto`) REFERENCES `produto` (`idproduto`);
-
---
--- Restrições para tabelas `vendas`
---
-ALTER TABLE `vendas`
-  ADD CONSTRAINT `vendas_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
-  ADD CONSTRAINT `vendas_ibfk_2` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`idproduto`);
+ALTER TABLE `itens_venda`
+  ADD CONSTRAINT `itens_venda_ibfk_1` FOREIGN KEY (`idvenda`) REFERENCES `venda` (`idvenda`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

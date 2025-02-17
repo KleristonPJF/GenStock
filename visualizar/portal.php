@@ -14,8 +14,7 @@
         ?>
         <a href="../rotas/rotas.php?acao=navcliente">Cliente</a>
         <a href="../rotas/rotas.php?acao=navproduto">Estoque</a>
-        <a href="../rotas/rotas.php?acao=naventrada">Entrada</a>
-        <a href="../rotas/rotas.php?acao=navvendas">Vendas</a>
+        <a href="../rotas/rotas.php?acao=navcarrinho">Carrinho</a>
         <a href="../rotas/rotas.php?acao=logout">Logout</a>
     </div>
 </body>
